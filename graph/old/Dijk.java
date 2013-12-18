@@ -1,4 +1,4 @@
-package graph;
+package graph.old;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -82,7 +82,7 @@ public class Dijk {
 
 	private static void readFile(List<Node>[] adj, List<Integer> unVisited) {
 		try {
-			FileInputStream fstream = new FileInputStream("c:\\dijkstraData.txt");
+			FileInputStream fstream = new FileInputStream("C:\\Users\\sharath\\Documents\\dijk_latest.txt");
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
@@ -124,7 +124,8 @@ public class Dijk {
 		
 		readFile(adj, unVisited);
 		dij(adj, distanceList, visited, unVisited);
-		System.out.println(distanceList[7] + ", " + distanceList[37] + ", " + distanceList[59] + ", " + distanceList[82] + ", " + distanceList[99] + ", "
-				+ distanceList[115] + ", " + distanceList[133] + ", " + distanceList[165] + ", " + distanceList[188] + ", "  + distanceList[197] + ", ");
+		System.out.println(distanceList[7] + "," + distanceList[37] + "," + distanceList[59] + "," + distanceList[82] + "," + distanceList[99] + ","
+				+ distanceList[115] + "," + distanceList[133] + "," + distanceList[165] + "," + distanceList[188] + ","  + distanceList[197]);
+		//System.out.println(distanceList[1] + ", " + distanceList[2] + ", " + distanceList[3] + ", " + distanceList[4] + ", " +  distanceList[5]);
 	}
 }

@@ -1,10 +1,10 @@
-package graph;
+package graph.old;
 
 import java.util.List;
 
 public class Dfs {
 	
-	public static void dfs(Graph g, Integer source, boolean[] visited) {
+	public static void dfs(GraphOld g, Integer source, boolean[] visited) {
 		List<Integer> children = g.adj[source];
 		for (int child : children) {
 			if (visited[child]) {
@@ -23,7 +23,7 @@ public class Dfs {
 	public static void main(String[] args) {
 		boolean[] visited = new boolean[13];
 		visited[0] = true;
-		dfs(new graph.Graph(), 0, visited);
+		dfs(new graph.old.GraphOld(), 0, visited);
 
 	}
 

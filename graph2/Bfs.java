@@ -37,6 +37,8 @@ public class Bfs {
 		}		
 	}
 	
+	
+	// graph search using bfs
 	public int bfs2(List[] graph, int findVertex) {
 		//init
 		Queue<Integer> queue = new LinkedList<Integer>();
@@ -53,7 +55,7 @@ public class Bfs {
 		visited.put(sourceNode, true);
 		queue.add(1);
 		level.put(1, 1);
-		System.out.println("visited nodes " + nodesVisitedInCurrentIteration);
+		//System.out.println("visited nodes " + nodesVisitedInCurrentIteration);
 		
 		while (!queue.isEmpty()) {
 			Integer parent = queue.poll();
@@ -67,6 +69,7 @@ public class Bfs {
 				queue.add(child);
 				level.put(child, level.get(parent) + 1);
 				if (child == findVertex) {
+					System.out.println(level.get(parent));
 					return level.get(parent);
 				}
 				totalNodesVisited++;
@@ -75,8 +78,9 @@ public class Bfs {
 			/*for (Integer child : nodesVisitedInCurrentIteration) {
 				System.out.print(child + " " );
 			}*/
-			System.out.println("totalNodesVisited " + totalNodesVisited);
+			
 		}
+		System.out.println("totalNodesVisited " + totalNodesVisited);
 		return -1;
 	}
 
@@ -85,7 +89,7 @@ public class Bfs {
 	 */
 	public static void main(String[] args) {
 		List[] graph= new GraphMaker().readGraph("c:\\dsaTextFiles\\simpleGraph.txt", 100, false);
-		new Bfs().bfs(graph);
+		new Bfs().bfs2(graph, 8);
 	}
 
 }

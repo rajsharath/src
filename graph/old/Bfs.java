@@ -1,4 +1,4 @@
-package graph;
+package graph.old;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class Bfs {
     }
   }
   
-  public static void bfs2(graph.Graph g, Integer source) {
+  public static void bfs2(graph.old.GraphOld g, Integer source) {
     Map<Integer, Boolean> visited = new HashMap<Integer, Boolean>();
     Queue<Integer> queue = new LinkedList<Integer>();
     queue.add(source);
@@ -93,7 +93,7 @@ public class Bfs {
    * @param args
    */
   public static void main(String[] args) {
-    bfs2(new graph.Graph(), 0);
+    bfs2(new graph.old.GraphOld(), 0);
 
   }
 
