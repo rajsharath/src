@@ -1,49 +1,37 @@
 package ds;
 
-public class MinNodeHeap {
+public class MinNodeHeap2 {
 
   Node[] heap = new Node[10000];
   int lastIndex = 0;
-
-  public Node min() {
-    if (lastIndex <= 0) {
-      System.out.print(" heap is empty ");
-      return null;
-    }
-    return heap[1];
-  }
-
-  public int size() {
-    return lastIndex;
-  }
   
-  public int decrementKey2(int heapArrIndex, int newMinDistance, int[] positionOfGivenVertexInHeap) {
+  public void decrementKey2(int currentNodeIndexInHeap, int newMinDistance, int[] positionOfGivenVertexInHeapArr) {
 	  // remove element at position "heapArrIndex" from heap
-	  Node node =  heap[heapArrIndex];
-	  heap[heapArrIndex] = heap[lastIndex];
-	  positionOfGivenVertexInHeap[lastIndex] = heapArrIndex;
+	  Node node =  heap[currentNodeIndexInHeap];
+	  heap[currentNodeIndexInHeap] = heap[lastIndex];
+	  positionOfGivenVertexInHeapArr[lastIndex] = currentNodeIndexInHeap;
 	  lastIndex--;
-	  bubbleDown2(heapArrIndex, positionOfGivenVertexInHeap);
+	  bubbleDown2(currentNodeIndexInHeap, positionOfGivenVertexInHeapArr);
 	  node.minDistance = newMinDistance;
-	  insert2(node, positionOfGivenVertexInHeap);
-	  return -1;
+	  insert2(node, positionOfGivenVertexInHeapArr);
   }
  
-  public void insert2(Node element, int[] positionInHeap) {
+  public void insert2(Node node, int[] positionInHeap) {
     lastIndex++;
-    heap[lastIndex] = element;
+    heap[lastIndex] = node;
+    positionInHeap[node.vertexId] = lastIndex;
     bubbleUp2(lastIndex, positionInHeap);
   }
 
-  private void bubbleUp2(int lastIndex, int[] positionInHeap) {
-    if (lastIndex == 1) {
+  private void bubbleUp2(int insertIndex, int[] positionInHeap) {
+    if (insertIndex == 1) {
       return;
     }
-    if (heap[lastIndex / 2].minDistance <= heap[lastIndex].minDistance) {
+    if (heap[insertIndex / 2].minDistance <= heap[insertIndex].minDistance) {
       return;
     }
-    swap2(heap, lastIndex, lastIndex / 2, positionInHeap);
-    bubbleUp2(lastIndex / 2, positionInHeap);
+    swap2(heap, insertIndex, insertIndex / 2, positionInHeap);
+    bubbleUp2(insertIndex / 2, positionInHeap);
   }
 
   public Node extractMin2(int[] positionOfGivenVertexInHeap) {
@@ -90,11 +78,7 @@ public class MinNodeHeap {
   }
 
   private void swapVertexPositionInHeap( int[] positionInHeap, int heapIndex1, int heapIndex2) {
-    int temp = positionInHeap[heap[heapIndex1].vertexId];
-    positionInHeap[heap[heapIndex1].vertexId] = positionInHeap[heap[heapIndex2].vertexId];
-    positionInHeap[heap[heapIndex2].vertexId] = temp;
-  }
-
-  public static void main(String[] args) {
+    positionInHeap[heap[heapIndex1].vertexId] = heapIndex2;
+    positionInHeap[heap[heapIndex2].vertexId] = heapIndex1;
   }
 }

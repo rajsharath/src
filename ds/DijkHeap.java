@@ -1,4 +1,4 @@
-package graph;
+package ds;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -16,20 +16,20 @@ public class DijkHeap {
                         minDistancesArray[i] = maxDistance;
                 }
                 minDistancesArray[1] = 0;
-
-                // initialize the heap
-                MinNodeHeap minHeap = new MinNodeHeap();
-                minHeap.insert(new Node(1, 0));
-                for (int i = 2 ; i <= graph.keySet().size() ; i++) {
-                        minHeap.insert(new Node(i, maxDistance));
-                }
-
-                // vertexId is the index of the array
+                
+             // vertexId is the index of the array
                 int[] positionInHeap = new int[graph.keySet().size() + 1];
                 positionInHeap[1] = 1;
                 for (int i = 2 ; i <= graph.keySet().size() ; i++) {
                         positionInHeap[i] = i;
-                }        
+                }  
+
+                // initialize the heap
+                MinNodeHeap2 minHeap = new MinNodeHeap2();
+                minHeap.insert2(new Node(1, 0), positionInHeap);
+                for (int i = 2 ; i <= graph.keySet().size() ; i++) {
+                        minHeap.insert2(new Node(i, maxDistance), positionInHeap);
+                }                      
                 
                 int count = graph.keySet().size() - 1;
 
@@ -43,8 +43,7 @@ public class DijkHeap {
                                 if (currentMinDist <= dgs) {
                                         continue;
                                 }
-                                int newPositionInHeap = minHeap.decrementKey(positionInHeap[childVertex], dgs, positionInHeap);
-                                positionInHeap[childVertex] = newPositionInHeap;
+                                minHeap.decrementKey2(positionInHeap[childVertex], dgs, positionInHeap);
                         }
                         count--;
                 }
@@ -56,7 +55,7 @@ public class DijkHeap {
         
         private static void readFile(Map<Integer, Map<Integer, Integer>> graph) {
                 try {
-                        FileInputStream fstream = new FileInputStream("/tmp/dijkstraData.txt");
+                        FileInputStream fstream = new FileInputStream("c:\\dsaTextFiles\\dijkstraData.txt");
                         DataInputStream in = new DataInputStream(fstream);
                         BufferedReader br = new BufferedReader(new InputStreamReader(in));
                         String strLine;
